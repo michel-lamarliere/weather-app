@@ -1,1 +1,5 @@
-# weather-app-react
+Weather App Using ReactJS
+
+
+
+By Michel Lamarlière
