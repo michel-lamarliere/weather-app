@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.scss';
 
-import Current from './components/Current/Current';
 import Header from './components/Layout/Header';
+import Current from './components/Current/Current';
 import Hourly from './components/Hourly/Hourly';
+import Daily from './components/Daily/Daily';
 
 function App(props) {
     return (
@@ -11,6 +12,7 @@ function App(props) {
             <Header />
             <Current />
             <Hourly />
+            <Daily />
         </>
     );
 }

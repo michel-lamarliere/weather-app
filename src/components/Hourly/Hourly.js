@@ -6,11 +6,12 @@ import { useWeatherData } from '../../store/WeatherContext';
 const Hourly = () => {
     const [weatherData] = useWeatherData();
 
+	// eslint-disable-next-line no-extend-native
 	Date.prototype.addHours = function (h) {
 		this.setHours(this.getHours() + h);
 		let rawNumber = this.getHours().toString();
         let newNumber = `${rawNumber}h`;
-        if (rawNumber == new Date().getHours()) {
+        if (rawNumber === new Date().getHours()) {
             newNumber = 'Now';
         }
 		if (rawNumber.length < 2) {
