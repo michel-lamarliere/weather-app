@@ -9,19 +9,3 @@ header {
     grid-gap: 1rem;
     color: $headerColor;
 }
-
-.unit-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 2rem;
-    color: white;
-    background-color: $BgOpacity25;
-    cursor: pointer;
-
-    &:active {
-        background-color: $BgOpacity50;
-    }
-}

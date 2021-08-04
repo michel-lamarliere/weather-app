@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React from 'react';
 import classes from './Header.module.scss';
 import Form from '../Form/Form';
+import { UnitButton } from '../UI/Buttons';
 
 const Header = (props) => {
-
     return (
         <header>
             <Form />
-            <button className={classes['unit-button']}>°C</button>
+            <UnitButton />
         </header>
     );
 };

@@ -3,12 +3,15 @@ import classes from './Form.module.scss';
 
 import { useSearch } from '../../store/SearchContext';
 import { useCityData } from '../../store/CityContext';
+import { useWeatherData } from '../../store/WeatherContext';
+
 
 const Form = (props) => {
     const inputRef = useRef();
     // context
     const [searchInput, setSearchInput] = useSearch();
     const [cityData, setCityData] = useCityData();
+    const [weatherData, setWeatherData] = useWeatherData();
 
     const [cityInputIsValid, setCityInputIsValid] = useState(false);
     const [cityInputTouched, setCityInputTouched] = useState(false);
@@ -21,6 +24,8 @@ const Form = (props) => {
             const cityDataJson = await response.json();
             console.log(cityDataJson);
 
+            getWeatherData(cityDataJson.coord.lon, cityDataJson.coord.lat, 'metric');
+            
             if (cityDataJson.coord.lon) {
                 setCityData((prevCityData) => {
                     return {
@@ -33,13 +38,7 @@ const Form = (props) => {
                         errorText: '',
                     };
                 });
-                console.log('hello');
-            }
-
-            getWeatherData(cityDataJson.coord.lat, cityDataJson.coord.lon, 'metric');
-
-            console.log(`cityData App.js`);
-            console.log(cityData);
+            };
         })
         .catch((error) => {
             setCityData((prevCityData) => ({
@@ -56,11 +55,14 @@ const Form = (props) => {
 		)
         .then(async (response) => {
             const forecastJson = await response.json();
+            setWeatherData(forecastJson);
             console.log(forecastJson);
-            console.log(cityData);
         })
         .catch((error) => {
-            console.log(error);
+            setCityData((prevCityData) => ({
+				...prevCityData,
+				errorText: 'Please enter a valid city name.',
+            }));
         });
 	};
 
@@ -86,13 +88,8 @@ const Form = (props) => {
         }
         setCityInputIsValid(true);
 
-        // props.onSearchSubmit();
-        getCityData(searchInput)
+        getCityData(searchInput);
 
-        // setTimeout(() => {
-        //     // props.onGettingData();
-        //     getWeatherData(cityData.lat, cityData.lon, 'metric');
-        // }, 500);
         setSearchInput('');
     };
 
