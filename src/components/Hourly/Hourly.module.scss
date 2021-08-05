@@ -19,6 +19,10 @@
 	height: 6rem;
 	border-radius: 1rem;
 	background-color: $BgOpacity50;
+
+    &_midnight {
+        background-color: $BgOpacity60;
+    }
 }
 
 .weather {

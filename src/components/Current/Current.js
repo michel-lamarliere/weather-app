@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classes from './Current.module.scss';
 
 import arrow_up from '../../assets/img/arrow_up.svg';

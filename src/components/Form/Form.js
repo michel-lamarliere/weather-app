@@ -1,14 +1,15 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import classes from './Form.module.scss';
 
+import { useUnit } from '../../store/UnitContext';
 import { useSearch } from '../../store/SearchContext';
 import { useCityData } from '../../store/CityContext';
 import { useWeatherData } from '../../store/WeatherContext';
 
-
 const Form = (props) => {
     const inputRef = useRef();
     // context
+    const [unit] = useUnit();
     const [searchInput, setSearchInput] = useSearch();
     const [cityData, setCityData] = useCityData();
     const [weatherData, setWeatherData] = useWeatherData();
@@ -22,10 +23,11 @@ const Form = (props) => {
 		})
         .then(async (response) => {
             const cityDataJson = await response.json();
-            console.log(cityDataJson);
+            console.log(cityDataJson)
 
-            getWeatherData(cityDataJson.coord.lon, cityDataJson.coord.lat, 'metric');
-            
+            const unitSign = unit ? 'metric' : 'imperial';
+            getWeatherData(cityDataJson.coord.lon, cityDataJson.coord.lat, unitSign);
+
             if (cityDataJson.coord.lon) {
                 setCityData((prevCityData) => {
                     return {
@@ -45,6 +47,7 @@ const Form = (props) => {
                 ...prevCityData,
                 errorText: 'Please enter a valid city name.',
             }));
+            setCityInputIsValid(false);
         });
 	};
 
@@ -56,7 +59,6 @@ const Form = (props) => {
         .then(async (response) => {
             const forecastJson = await response.json();
             setWeatherData(forecastJson);
-            console.log(forecastJson);
         })
         .catch((error) => {
             setCityData((prevCityData) => ({
@@ -88,17 +90,33 @@ const Form = (props) => {
         }
         setCityInputIsValid(true);
 
+        localStorage.setItem('city', searchInput);
         getCityData(searchInput);
 
         setSearchInput('');
     };
 
     const cityInputIsInvalid = !cityInputIsValid && cityInputTouched;
-    const inputClasses = cityInputIsInvalid ? `${classes['searchbar-error']}` : '';
+    const inputClasses = cityInputIsInvalid ? classes.searchbar_error : '';
+
+    const firstUpdate = useRef(true);
 
     useEffect(() => {
         inputRef.current.focus();
-    }, []);
+
+        if (localStorage.getItem('city')) {
+            getCityData(localStorage.getItem('city'));
+        } else {
+            // getCityData('toulouse');
+            console.log('okay')
+        }
+        
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+        };
+        getCityData(cityData.city);
+    }, [unit]);
 
     return (
         <form className={classes.form} onSubmit={searchHandler}>
