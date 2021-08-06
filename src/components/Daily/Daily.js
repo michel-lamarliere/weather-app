@@ -5,9 +5,12 @@ import arrow_up from '../../assets/img/arrow_up.svg';
 import arrow_down from '../../assets/img/arrow_down.svg';
 
 import { useWeatherData } from '../../store/WeatherContext';
+import { useIcons } from '../../hooks/use-icons';
 
-const Daily = (props) => {    
+const Daily = () => {
     const [weatherData] = useWeatherData();
+
+    const imgSrc = useIcons;
 
     // eslint-disable-next-line no-extend-native
     Date.prototype.addDays = function (d) {
@@ -65,16 +68,16 @@ const Daily = (props) => {
 						</div>
 						<div className={classes.minmax}>
 							<div className={classes.minmax_div}>
-								<img className={classes.minmax_div_img} src={arrow_up} alt='' />
+								<img className={classes.minmax_div_img} src={arrow_up} alt='max temperature' />
 								<div className={classes.minmax_div_text}>{day.temp.max.toFixed(0)}°</div>
 							</div>
 							<div className={classes.minmax_div}>
-								<img className={classes.minmax_div_img} src={arrow_down} alt='' />
+								<img className={classes.minmax_div_img} src={arrow_down} alt='min temperature' />
 								<div className={classes.minmax_div_text}>{day.temp.min.toFixed(0)}°</div>
 							</div>
 						</div>
 						<div className={classes.weather}>
-							<img className={classes.weather_img} src='./img/' alt='' />
+							<img className={classes.weather_img} src={imgSrc(1, index)} alt='weather icon' />
 						</div>
                         <div className={classes.temp}>{day.temp.day.toFixed(0)}°</div>
 					</div>

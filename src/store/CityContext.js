@@ -11,6 +11,7 @@ const CityProvider = (props) => {
         city: undefined,
         lon: undefined,
         lat: undefined,
+        dt: undefined,
         sunrise: undefined,
         sunset: undefined,
         errorText: undefined

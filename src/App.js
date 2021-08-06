@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
 
 import Header from './components/Layout/Header';
@@ -7,6 +7,10 @@ import Hourly from './components/Hourly/Hourly';
 import Daily from './components/Daily/Daily';
 
 function App(props) {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     return (
         <>
             <Header />

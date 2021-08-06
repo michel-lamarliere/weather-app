@@ -7,7 +7,7 @@ export const useUnit = () => {
 };
 
 const UnitProvider = (props) => {
-    const [unit, setUnit] = useState('celcius' || true);
+    const [unit, setUnit] = useState(true);
 
     return (
         <UnitContext.Provider value={[unit, setUnit]}>

@@ -1,19 +1,27 @@
 import React, { useState, useContext } from 'react';
 
 const SearchContext = React.createContext();
+const GeolocationContext = React.createContext();
 
 export const useSearch = () => {
     return useContext(SearchContext);
 };
 
+export const useGeolocation = () => {
+	return useContext(GeolocationContext);
+};
+
 const SearchProvider = (props) => {
     const [searchInput, setSearchInput] = useState('');
+    const [geolocation, setGeolocation] = useState(false);
 
     return (
         <SearchContext.Provider value={[searchInput, setSearchInput]}>
-            {props.children}
-        </SearchContext.Provider>
-    );
+            <GeolocationContext.Provider value={[geolocation, setGeolocation]}>
+			    {props.children}
+            </GeolocationContext.Provider>
+		</SearchContext.Provider>
+	);
 };
 
 export default SearchProvider;
