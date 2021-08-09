@@ -22,8 +22,9 @@ export const useIcons = (interval, index) => {
 
 	let div;
 
-    const getIcons = (json, time, sunrise, sunset) => {
-        time = Number(time);
+	const getIcons = (json, time, sunrise, sunset) => {
+		time = Number(time);
+
 		if (json.weather[0].id >= 300 && json.weather[0].id <= 321) {
 			div = nineD;
 		} else if (json.weather[0].id >= 200 && json.weather[0].id <= 232) {
@@ -50,7 +51,7 @@ export const useIcons = (interval, index) => {
 			} else if (json.weather[0].id === 803 || json.weather[0].id === 804) {
 				div = fourD;
 			}
-		} else if (time >= sunset || time <= sunrise) {
+		} else if ((time >= 0 && time <= sunrise) || time >= sunset) {
 			if (json.weather[0].id === 800) {
 				div = oneN;
 			} else if (json.weather[0].id === 801) {
@@ -60,39 +61,29 @@ export const useIcons = (interval, index) => {
 			} else if (json.weather[0].id === 803 || json.weather[0].id === 804) {
 				div = fourD;
 			}
-		} else {
-			if (json.weather[0].id === 800) {
-				div = oneD;
-			} else if (json.weather[0].id === 801) {
-				div = twoD;
-			} else if (json.weather[0].id === 802) {
-				div = threeD;
-			} else if (json.weather[0].id === 803 || json.weather[0].id === 804) {
-				div = fourD;
-			}
 		}
 		return div;
 	};
 
-    if (interval === 0) {
-        // current and hourly
+	if (interval === 0) {
+		// current and hourly
 		const imgSrc =
 			weatherData &&
 			getIcons(
 				weatherData.hourly[index],
-				new Date(weatherData.hourly[index].dt * 1000).getHours(),
-				new Date(weatherData.current.sunrise * 1000).getHours(),
-				new Date(weatherData.current.sunset * 1000).getHours()
+				new Date((weatherData.hourly[index].dt + weatherData.timezone_offset) * 1000).getHours(),
+				new Date((weatherData.current.sunrise + weatherData.timezone_offset) * 1000).getHours(),
+				new Date((weatherData.current.sunset + weatherData.timezone_offset) * 1000).getHours()
 			);
-        } else if (interval === 1) {
-        // daily
+	} else if (interval === 1) {
+		// daily
 		const imgSrc =
 			weatherData &&
 			getIcons(
 				weatherData.daily[index],
-                new Date(weatherData.daily[index].dt * 1000).getHours(),
-                new Date(weatherData.current.sunrise * 1000).getHours(),
-                new Date(weatherData.current.sunset * 1000).getHours()
+				new Date((weatherData.daily[index].dt + weatherData.timezone_offset) * 1000).getHours(),
+				new Date((weatherData.current.sunrise + weatherData.timezone_offset) * 1000).getHours(),
+				new Date((weatherData.current.sunset + weatherData.timezone_offset) * 1000).getHours()
 			);
 	}
 

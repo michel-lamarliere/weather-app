@@ -7,52 +7,84 @@ import { LeftButton, RightButton } from '../UI/Buttons';
 
 const Hourly = () => {
 	const [weatherData] = useWeatherData();
-    const containerRef = useRef();
-    const buttonRef = useRef();
+	const containerRef = useRef();
+	const buttonRef = useRef();
 
-    const imgSrc = useIcons;
+	const imgSrc = useIcons;
 
 	let hourClass = '';
 
 	// eslint-disable-next-line no-extend-native
-	Date.prototype.addHours = function (h) {
-		this.setHours(this.getHours() + h);
-		let rawNumber = this.getHours().toString();
-		let newNumber = `${rawNumber}h`;
+	// Date.prototype.addHours = function (h, timezone) {
+	//     console.log(this)
+	//     this.setHours(this.getHours() + h);
+	//     console.log(this.toUTCString());
+	//     let rawNumber = (this.getHours().toString())
+	//     console.log(rawNumber);
+	// 	let newNumber = `${rawNumber}h`;
 
-		if (rawNumber === new Date().getHours().toString()) {
-			newNumber = 'Now';
-		}
-		if (rawNumber.length < 2) {
-			newNumber = `0${rawNumber}h`;
-		}
-		if (newNumber === '23h') {
-			hourClass = classes.box_midnight;
-		}
+	// 	if (rawNumber === new Date().getHours().toString()) {
+	// 		newNumber = 'Now';
+	// 	}
+	// 	if (rawNumber.length < 2) {
+	// 		newNumber = `0${rawNumber}h`;
+	// 	}
+	// 	if (newNumber === '23h') {
+	// 		hourClass = classes.box_midnight;
+	// 	}
+	// 	return newNumber;
+    // };
+    
+    const hourFormatter = (hour, index) => {
+        console.log(hour, index)
+        let newHour = '';
 
-		return newNumber;
+        if (index === 0) {
+            newHour = 'Now'
+        } else {
+            newHour = hour;
+        }
+        if (hour === 23) {
+            hourClass = classes.box_midnight
+        }
+
+        if (newHour.toString().length < 2) {
+            newHour = `0${hour}h`
+        } else if (newHour.toString().length === 2) {
+            newHour = `${hour}h`;
+        }
+
+        return newHour;
     };
 
 	useEffect(() => {
 		containerRef.current.scrollTo(0, 0);
 	}, []);
 
-    return (
+	return (
 		<div className={classes.container}>
-            <LeftButton onClick={() => containerRef.current.scrollBy({ left: -120, top: 0, behavior: 'smooth'})} />
+			<LeftButton onClick={() => containerRef.current.scrollBy({ left: -120, top: 0, behavior: 'smooth' })} />
 			<div ref={containerRef} className={classes.hourly}>
 				{weatherData &&
 					weatherData.hourly.slice(0, 24).map((hourlyTemp, index) => (
 						<div className={`${classes.box} ${hourClass}`} key={Math.random()}>
-							<div className='hourly-box-time'>{new Date().addHours(index)}</div>
+							<div className='hourly-box-time'>
+								{hourFormatter(new Date((weatherData.hourly[index].dt + weatherData.timezone_offset) * 1000).getUTCHours(), index)}
+							</div>
 							<img className={classes.weather} src={imgSrc(0, index)} alt='weather icon' />
 							<div className='hourly-box-temp'>{hourlyTemp.temp.toFixed(0)}°</div>
 						</div>
 					))}
 			</div>
-            <RightButton onClick={() => containerRef.current.scrollBy({
-                left: 120, top
-                :0, behavior: 'smooth'})} />
+			<RightButton
+				onClick={() =>
+					containerRef.current.scrollBy({
+						left: 120,
+						top: 0,
+						behavior: 'smooth',
+					})
+				}
+			/>
 		</div>
 	);
 };

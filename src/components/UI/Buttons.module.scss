@@ -62,3 +62,14 @@
     }
 }
 
+
+@media screen and (max-width: 900px) {
+    .left {
+        left: -1rem;
+    }
+
+    .right {
+        left: auto;
+        right: -1rem;
+    }
+}

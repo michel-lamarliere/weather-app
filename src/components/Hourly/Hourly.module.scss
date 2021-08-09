@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: flex-start;
     overflow: auto;
-    height: 7.5rem;
+    height: 8.5rem;
 	margin: 1rem auto 0 auto;
 	grid-gap: 1rem;
 }
@@ -35,4 +35,10 @@
 	align-items: flex-end;
 	height: 1.5rem;
 	width: 1.5rem;
+}
+
+@media screen and (max-width: 900px) {
+    .hourly {
+        width: 90%;
+    }
 }
