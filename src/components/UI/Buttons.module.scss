@@ -6,7 +6,7 @@
     justify-content: center;
     width: 2rem;
     height: 2rem;
-    border-radius: 2rem;
+    border-radius: 50%;
     color: white;
     background-color: $BgOpacity25;
     cursor: pointer;
@@ -22,7 +22,7 @@
     justify-content: center;
     width: 2rem;
     height: 2rem;
-    border-radius: 2rem;
+    border-radius: 50%;
     color: white;
     background-color: $BgOpacity25;
     cursor: pointer;
@@ -43,7 +43,7 @@
     background: transparent;
     top: 50%;
     transform: translateY(-50%);
-    left: -2.5rem;
+    left: -5rem;
     cursor: pointer;
     
     &_img {
@@ -55,7 +55,7 @@
 .right {
     @extend .left;
     left: auto;
-    right: -2.5rem;
+    right: -5rem;
 
     &_img {
         @extend .left_img;
@@ -63,13 +63,8 @@
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 750px) {
     .left {
-        left: -1rem;
-    }
-
-    .right {
-        left: auto;
-        right: -1rem;
+        display: none;
     }
 }

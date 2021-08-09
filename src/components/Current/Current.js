@@ -4,6 +4,9 @@ import classes from './Current.module.scss';
 import arrow_up from '../../assets/img/arrow_up.svg';
 import arrow_down from '../../assets/img/arrow_down.svg';
 
+import sunrise from '../../assets/img/sunrise.svg';
+import sunset from '../../assets/img/sunset.svg';
+
 import { useCityData } from '../../store/CityContext';
 import { useWeatherData } from '../../store/WeatherContext';
 
@@ -43,14 +46,30 @@ const Current = (props) => {
 			break;
 		default:
 			day = 'Error';
-	}
+    }
+    
+    const getSunriseSunset = (sunriseOrSunset) => {
+        let hours = new Date((sunriseOrSunset + weatherData.timezone_offset) * 1000).getHours();
+        if (hours.toString().length < 2) {
+			hours = `0${hours}`;
+        }
+        
+        let minutes = new Date((sunriseOrSunset + weatherData.timezone_offset) * 1000).getMinutes();
+
+        if (minutes.toString().length < 2) {
+            minutes = `0${minutes}`
+        }
+
+        let time = `${hours}:${minutes}`
+
+        return time;
+    } 
 
 	return (
 		<div className={classes.current}>
 			<div className={classes.city}>{cityData.city}</div>
 			<img src={imgSrc} alt='icon' className={classes.weather} />
 			<div className={classes.temp}>{weatherData && weatherData.hourly[0].temp.toFixed(0)}°</div>
-			<div className={classes.date}>{`${day}, ${todayDate}`}</div>
 			<div className={classes.minmax}>
 				<div className={classes['minmax-div']}>
 					<img src={arrow_up} alt='max temperature' />
@@ -62,6 +81,21 @@ const Current = (props) => {
 					<img src={arrow_down} alt='min temperature' />
 					<div className={classes['minmax-div-text']}>
 						{weatherData && weatherData.daily[0].temp.min.toFixed(0)}°
+					</div>
+				</div>
+			</div>
+			<div className={classes.date}>{`${day}, ${todayDate}`}</div>
+			<div className={classes.sunrise_sunset}>
+				<div className={classes.sunrise_sunset_div}>
+					<img src={sunrise} alt='sunrise time' />
+					<div>
+						{weatherData && getSunriseSunset(weatherData.current.sunrise)}
+					</div>
+				</div>
+				<div className={classes.sunrise_sunset_div}>
+					<img src={sunset} alt='sunset time' />
+					<div>
+						{weatherData && getSunriseSunset(weatherData.current.sunset)}
 					</div>
 				</div>
 			</div>

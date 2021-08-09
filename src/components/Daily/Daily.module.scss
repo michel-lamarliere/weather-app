@@ -72,16 +72,13 @@
 }
 
 @media screen and (max-width: 900px) {
-    .container {
-        width: 90%;
-    }
-
     .minmax {
     	justify-content: flex-end;
     }
 }
 
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 450px) {
     .minmax {
         height: 80%;
         font-size: 0.90rem;
