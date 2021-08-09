@@ -72,6 +72,9 @@
 }
 
 @media screen and (max-width: 900px) {
+    .container {
+        width: 90%;
+    }
 
     .minmax {
     	justify-content: flex-end;
