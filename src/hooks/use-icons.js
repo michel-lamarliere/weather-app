@@ -11,7 +11,7 @@ import fiftyD from '../assets/img/50d.svg';
 import oneN from '../assets/img/01n.svg';
 import twoN from '../assets/img/02n.svg';
 
-import { useWeatherData } from '../store/WeatherContext';
+import { useWeatherData } from '../store/weather-context';
 
 export const useIcons = (interval, index) => {
 	const [weatherData] = useWeatherData();

@@ -6,7 +6,7 @@ export const useWeatherData = () => {
     return useContext(WeatherContext);
 };
 
-const WeatherProvider = (props) => {
+const WeatherContextProvider = (props) => {
     const [weatherData, setWeatherData] = useState();
 
     return (
@@ -16,4 +16,4 @@ const WeatherProvider = (props) => {
     )
 };
 
-export default WeatherProvider;
+export default WeatherContextProvider;

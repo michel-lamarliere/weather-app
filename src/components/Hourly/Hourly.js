@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import classes from './Hourly.module.scss';
 
-import { useWeatherData } from '../../store/WeatherContext';
+import { useWeatherData } from '../../store/weather-context';
 import { useIcons } from '../../hooks/use-icons';
 import { usePop } from '../../hooks/use-pop';
 import { LeftButton, RightButton } from '../UI/Buttons';

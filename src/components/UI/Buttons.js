@@ -6,8 +6,8 @@ import geo from '../../assets/img/geolocation.png';
 import left_button from '../../assets/img/left.png';
 import right_button from '../../assets/img/right.png';
 
-import { useSearch, useGeolocation } from '../../store/SearchContext';
-import { useUnit } from '../../store/UnitContext';
+import { useSearch, useGeolocation } from '../../store/search-context';
+import { useUnit } from '../../store/unit-context';
 
 export const UnitButton = (props) => {
     const [unit, setUnit] = useUnit();

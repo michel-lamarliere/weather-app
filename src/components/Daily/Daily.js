@@ -4,7 +4,7 @@ import classes from './Daily.module.scss';
 import arrow_up from '../../assets/img/arrow_up.svg';
 import arrow_down from '../../assets/img/arrow_down.svg';
 
-import { useWeatherData } from '../../store/WeatherContext';
+import { useWeatherData } from '../../store/weather-context';
 import { useIcons } from '../../hooks/use-icons';
 import { usePop } from '../../hooks/use-pop';
 

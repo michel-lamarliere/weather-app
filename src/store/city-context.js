@@ -6,7 +6,7 @@ export const useCityData = () => {
     return useContext(CityContext);
 }
 
-const CityProvider = (props) => {
+const CityContextProvider = (props) => {
     let [cityData, setCityData] = useState({
         city: undefined,
         lon: undefined,
@@ -25,4 +25,4 @@ const CityProvider = (props) => {
     )
 };
 
-export default CityProvider;
+export default CityContextProvider;

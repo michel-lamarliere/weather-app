@@ -11,7 +11,7 @@ export const useGeolocation = () => {
 	return useContext(GeolocationContext);
 };
 
-const SearchProvider = (props) => {
+const SearchContextProvider = (props) => {
     const [searchInput, setSearchInput] = useState('');
     const [geolocation, setGeolocation] = useState(false);
 
@@ -24,4 +24,4 @@ const SearchProvider = (props) => {
 	);
 };
 
-export default SearchProvider;
+export default SearchContextProvider;

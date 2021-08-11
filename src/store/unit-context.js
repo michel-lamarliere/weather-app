@@ -6,7 +6,7 @@ export const useUnit = () => {
     return useContext(UnitContext);
 };
 
-const UnitProvider = (props) => {
+const UnitContextProvider = (props) => {
     const [unit, setUnit] = useState(true);
 
     return (
@@ -16,4 +16,4 @@ const UnitProvider = (props) => {
     );
 };
 
-export default UnitProvider;
+export default UnitContextProvider;

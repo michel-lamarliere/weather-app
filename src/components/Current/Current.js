@@ -7,8 +7,8 @@ import arrow_down from '../../assets/img/arrow_down.svg';
 import sunrise from '../../assets/img/sunrise.svg';
 import sunset from '../../assets/img/sunset.svg';
 
-import { useCityData } from '../../store/CityContext';
-import { useWeatherData } from '../../store/WeatherContext';
+import { useCityData } from '../../store/city-context';
+import { useWeatherData } from '../../store/weather-context';
 
 import { useIcons } from '../../hooks/use-icons';
 

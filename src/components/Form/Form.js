@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classes from './Form.module.scss';
 
-import { useUnit } from '../../store/UnitContext';
-import { useSearch, useGeolocation } from '../../store/SearchContext';
-import { useCityData } from '../../store/CityContext';
-import { useWeatherData } from '../../store/WeatherContext';
+import { useUnit } from '../../store/unit-context';
+import { useSearch, useGeolocation } from '../../store/search-context';
+import { useCityData } from '../../store/city-context';
+import { useWeatherData } from '../../store/weather-context';
 
 const Form = (props) => {
 	const inputRef = useRef();
