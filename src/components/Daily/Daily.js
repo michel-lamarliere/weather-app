@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import classes from './Daily.module.scss';
 
 import arrow_up from '../../assets/img/arrow_up.svg';
@@ -6,56 +6,50 @@ import arrow_down from '../../assets/img/arrow_down.svg';
 
 import { useWeatherData } from '../../store/WeatherContext';
 import { useIcons } from '../../hooks/use-icons';
+import { usePop } from '../../hooks/use-pop';
 
 const Daily = () => {
     const [weatherData] = useWeatherData();
-
     const imgSrc = useIcons;
+    const pop = usePop;
 
-    // eslint-disable-next-line no-extend-native
-    Date.prototype.addDays = function (d) {
-        let today = new Date();
-        let tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + d + 1);
+    const getDayOfWeek = (dataSource, index) => {
+		let dayOfWeek = new Date((dataSource.daily[index].dt + dataSource.timezone_offset) * 1000).getDay();
 
-        let nextDays = '';
-		switch (tomorrow.toUTCString().slice(0, 3)) {
-			case 'Mon':
-				nextDays = 'Monday';
-				break;
-			case 'Tue':
-				nextDays = 'Tuesday';
-				break;
-			case 'Wed':
-				nextDays = 'Wednesday';
-				break;
-			case 'Thu':
-				nextDays = 'Thursday';
-				break;
-			case 'Fri':
-				nextDays = 'Friday';
-				break;
-			case 'Sat':
-				nextDays = 'Saturday';
-				break;
-			case 'Sun':
-				nextDays = 'Sunday';
+        switch (dayOfWeek) {
+            case 0:
+                dayOfWeek = 'Monday';
+                break;
+            case 1:
+                dayOfWeek = 'Tuesday';
+                break;
+            case 2:
+                dayOfWeek = 'Wednesday';
+                break;
+            case 3:
+                dayOfWeek = 'Thursday';
+                break;
+            case 4:
+                dayOfWeek = 'Friday';
+                break;
+            case 5:
+                dayOfWeek = 'Saturday';
+                break;
+            case 6:
+                dayOfWeek = 'Sunday';
                 break;
             default:
-                nextDays = 'Error';
-		}
-        return nextDays;
-	};
-	
-    // eslint-disable-next-line no-extend-native
-    Date.prototype.addDate = function (d) {
-        let today = new Date();
-        let nextDays = new Date(new Date(today).getTime() + 60 * 60 * 24 * 1000 * d);
-        let nextDaysString = nextDays.toUTCString();
-        let result = nextDaysString.slice(5, 16);
+                dayOfWeek = 'Error';
+        }
 
-		return result;
+		return dayOfWeek;
 	};
+
+    const getDate = (dataSource, index) => {
+        let date = new Date((dataSource.daily[index].dt + dataSource.timezone_offset) * 1000).toUTCString().slice(5, 16);
+
+        return date;
+    }
 
 	return (
 		<div className={classes.container}>
@@ -63,8 +57,8 @@ const Daily = () => {
 				weatherData.daily.slice(0, 7).map((day, index) => (
 					<div className={classes.day} key={Math.random()}>
 						<div className={classes.date}>
-                            <div className={classes.date_day}>{new Date().addDays(index)}</div>
-                            <div className={classes.date_date}>{new Date().addDate(index)}</div>
+							<div className={classes.date_day}>{getDayOfWeek(weatherData, index)}</div>
+							<div className={classes.date_date}>{getDate(weatherData, index)}</div>
 						</div>
 						<div className={classes.minmax}>
 							<div className={classes.minmax_div}>
@@ -78,8 +72,11 @@ const Daily = () => {
 						</div>
 						<div className={classes.weather}>
 							<img className={classes.weather_img} src={imgSrc(1, index)} alt='weather icon' />
+							<div className={classes.weather_pop}>
+								{pop(weatherData.daily[index].pop, imgSrc(1, index))}
+							</div>
 						</div>
-                        <div className={classes.temp}>{day.temp.day.toFixed(0)}°</div>
+						<div className={classes.temp}>{day.temp.day.toFixed(0)}°</div>
 					</div>
 				))}
 		</div>

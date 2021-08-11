@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react';
-
 import oneD from '../assets/img/01d.svg';
 import twoD from '../assets/img/02d.svg';
 import threeD from '../assets/img/03d.svg';
@@ -14,60 +12,57 @@ import oneN from '../assets/img/01n.svg';
 import twoN from '../assets/img/02n.svg';
 
 import { useWeatherData } from '../store/WeatherContext';
-import { useCityData } from '../store/CityContext';
 
 export const useIcons = (interval, index) => {
 	const [weatherData] = useWeatherData();
-	const [cityData] = useCityData();
-
-	let div;
+    let imgSrc;
 
 	const getIcons = (json, time, sunrise, sunset) => {
 		time = Number(time);
 
 		if (json.weather[0].id >= 300 && json.weather[0].id <= 321) {
-			div = nineD;
+			imgSrc = nineD;
 		} else if (json.weather[0].id >= 200 && json.weather[0].id <= 232) {
-			div = elevenD;
+			imgSrc = elevenD;
 		} else if (json.weather[0].id >= 500 && json.weather[0].id <= 504) {
-			div = tenD;
+			imgSrc = tenD;
 		} else if (json.weather[0].id === 511) {
-			div = thirteenD;
+			imgSrc = thirteenD;
 		} else if (json.weather[0].id >= 520 && json.weather[0].id <= 531) {
-			div = nineD;
+			imgSrc = nineD;
 		} else if (json.weather[0].id >= 600 && json.weather[0].id <= 622) {
-			div = thirteenD;
+			imgSrc = thirteenD;
 		} else if (json.weather[0].id >= 701 && json.weather[0].id <= 781) {
-			div = fiftyD;
+			imgSrc = fiftyD;
 		}
 
 		if (time >= sunrise && time <= sunset) {
 			if (json.weather[0].id === 800) {
-				div = oneD;
+				imgSrc = oneD;
 			} else if (json.weather[0].id === 801) {
-				div = twoD;
+				imgSrc = twoD;
 			} else if (json.weather[0].id === 802) {
-				div = threeD;
+				imgSrc = threeD;
 			} else if (json.weather[0].id === 803 || json.weather[0].id === 804) {
-				div = fourD;
+				imgSrc = fourD;
 			}
 		} else if ((time >= 0 && time <= sunrise) || time >= sunset) {
 			if (json.weather[0].id === 800) {
-				div = oneN;
+				imgSrc = oneN;
 			} else if (json.weather[0].id === 801) {
-				div = twoN;
+				imgSrc = twoN;
 			} else if (json.weather[0].id === 802) {
-				div = threeD;
+				imgSrc = threeD;
 			} else if (json.weather[0].id === 803 || json.weather[0].id === 804) {
-				div = fourD;
+				imgSrc = fourD;
 			}
 		}
-		return div;
+		return imgSrc;
 	};
 
 	if (interval === 0) {
 		// current and hourly
-		const imgSrc =
+		imgSrc =
 			weatherData &&
 			getIcons(
 				weatherData.hourly[index],
@@ -77,7 +72,7 @@ export const useIcons = (interval, index) => {
 			);
 	} else if (interval === 1) {
 		// daily
-		const imgSrc =
+        imgSrc =
 			weatherData &&
 			getIcons(
 				weatherData.daily[index],
@@ -87,5 +82,5 @@ export const useIcons = (interval, index) => {
 			);
 	}
 
-	return div;
+	return imgSrc;
 };

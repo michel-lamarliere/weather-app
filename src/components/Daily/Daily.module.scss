@@ -54,14 +54,21 @@
 
 .weather {
 	display: flex;
+    flex-direction: column;
 	justify-content: flex-end;
-	align-items: center;
+	align-items: flex-end;
+    gap: 0.25rem;
 	width: 25%;
 
 	&_img {
 		width: 2rem;
 		height: 2rem;
 	}
+
+    &_pop {
+        font-size: 0.55rem;
+        margin-right: 0.4rem;
+    }
 }
 
 .temp {

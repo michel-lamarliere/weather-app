@@ -16,9 +16,9 @@ const Form = (props) => {
 	const [weatherData, setWeatherData] = useWeatherData();
 
 	const [cityInputIsValid, setCityInputIsValid] = useState(false);
-    const [cityInputTouched, setCityInputTouched] = useState(false);
-    
-    const getCityName = (lon, lat) => {
+	const [cityInputTouched, setCityInputTouched] = useState(false);
+
+	const getCityName = (lon, lat) => {
 		fetch(
 			`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=63711ece4bcfaa691a62cb55c0c063a2`
 		).then(async (response) => {
@@ -34,7 +34,6 @@ const Form = (props) => {
 		})
 			.then(async (response) => {
 				const cityDataJson = await response.json();
-				console.log(cityDataJson);
 
 				const unitSign = unit ? 'metric' : 'imperial';
 				getWeatherData(cityDataJson.coord.lon, cityDataJson.coord.lat, unitSign);
@@ -46,8 +45,8 @@ const Form = (props) => {
 							city: cityDataJson.name,
 							lon: cityDataJson.coord.lon,
 							lat: cityDataJson.coord.lat,
-                            dt: cityDataJson.dt,
-                            timezone: cityDataJson.timezone,
+							dt: cityDataJson.dt,
+							timezone: cityDataJson.timezone,
 							sunrise: cityDataJson.sys.sunrise,
 							sunset: cityDataJson.sys.sunset,
 							errorText: '',
@@ -71,7 +70,6 @@ const Form = (props) => {
 		)
 			.then(async (response) => {
 				const forecastJson = await response.json();
-				console.log(forecastJson);
 				setWeatherData(forecastJson);
 			})
 			.catch((error) => {
@@ -82,32 +80,26 @@ const Form = (props) => {
 			});
 	};
 
-	const inputChangeHandler = (event) => {
-		setCityData((prevCityData) => {
-			return {
-				...prevCityData,
-				errorText: '',
-			};
-		});
-		setSearchInput(event.target.value);
+	const inputChangeHandler = () => {
 		setCityInputIsValid(true);
 	};
 
-	const searchHandler = (event) => {
+	const submitHandler = (event) => {
 		event.preventDefault();
 
+		const enteredCityName = inputRef.current.value;
 		setCityInputTouched(true);
 
-		if (searchInput === '' || searchInput === undefined || cityData.errorText) {
+		if (enteredCityName.trim().length === 0 || enteredCityName === undefined || cityData.errorText) {
+			inputRef.current.value = '';
 			setCityInputIsValid(false);
 			return;
 		}
 		setCityInputIsValid(true);
 
-		localStorage.setItem('city', searchInput);
-		getCityData(searchInput);
-
-		setSearchInput('');
+		localStorage.setItem('city', enteredCityName);
+		getCityData(enteredCityName);
+        inputRef.current.value = '';
 	};
 
 	const cityInputIsInvalid = !cityInputIsValid && cityInputTouched;
@@ -122,7 +114,6 @@ const Form = (props) => {
 			getCityData(localStorage.getItem('city'));
 		} else {
 			getCityData('toulouse');
-			console.log('okay');
 		}
 
 		if (firstUpdate.current) {
@@ -130,25 +121,24 @@ const Form = (props) => {
 			return;
 		}
 		getCityData(cityData.city);
-    }, [unit]);
+	}, [unit]);
 
-    if (geolocation) {
-        let coord = navigator.geolocation.getCurrentPosition((position) => {
-            getCityName(position.coords.longitude, position.coords.latitude);
-        });
-        setGeolocation(false);
-    }
+	if (geolocation) {
+		let coord = navigator.geolocation.getCurrentPosition((position) => {
+			getCityName(position.coords.longitude, position.coords.latitude);
+		});
+		setGeolocation(false);
+	}
 
 	return (
-		<form className={classes.form} onSubmit={searchHandler}>
+		<form className={classes.form} onSubmit={submitHandler}>
 			<span className={classes.magnifier}></span>
 			<input
+				ref={inputRef}
 				type='search'
 				className={`${classes.searchbar} ${inputClasses}`}
 				placeholder='Search'
-				value={searchInput}
 				onChange={inputChangeHandler}
-				ref={inputRef}
 			/>
 		</form>
 	);

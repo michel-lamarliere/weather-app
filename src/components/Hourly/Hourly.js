@@ -1,42 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import classes from './Hourly.module.scss';
 
 import { useWeatherData } from '../../store/WeatherContext';
 import { useIcons } from '../../hooks/use-icons';
+import { usePop } from '../../hooks/use-pop';
 import { LeftButton, RightButton } from '../UI/Buttons';
 
 const Hourly = () => {
 	const [weatherData] = useWeatherData();
 	const containerRef = useRef();
-	const buttonRef = useRef();
 
-	const imgSrc = useIcons;
+    const imgSrc = useIcons;
+    const pop = usePop;
 
 	let hourClass = '';
-
-	// eslint-disable-next-line no-extend-native
-	// Date.prototype.addHours = function (h, timezone) {
-	//     console.log(this)
-	//     this.setHours(this.getHours() + h);
-	//     console.log(this.toUTCString());
-	//     let rawNumber = (this.getHours().toString())
-	//     console.log(rawNumber);
-	// 	let newNumber = `${rawNumber}h`;
-
-	// 	if (rawNumber === new Date().getHours().toString()) {
-	// 		newNumber = 'Now';
-	// 	}
-	// 	if (rawNumber.length < 2) {
-	// 		newNumber = `0${rawNumber}h`;
-	// 	}
-	// 	if (newNumber === '23h') {
-	// 		hourClass = classes.box_midnight;
-	// 	}
-	// 	return newNumber;
-    // };
     
     const hourFormatter = (hour, index) => {
-        console.log(hour, index)
         let newHour = '';
 
         if (index === 0) {
@@ -68,10 +47,18 @@ const Hourly = () => {
 				{weatherData &&
 					weatherData.hourly.slice(0, 24).map((hourlyTemp, index) => (
 						<div className={`${classes.box} ${hourClass}`} key={Math.random()}>
-							<div className='hourly-box-time'>
-								{hourFormatter(new Date((weatherData.hourly[index].dt + weatherData.timezone_offset) * 1000).getUTCHours(), index)}
+							<div>
+								{hourFormatter(
+									new Date(
+										(weatherData.hourly[index].dt + weatherData.timezone_offset) * 1000
+									).getUTCHours(),
+									index
+								)}
 							</div>
-							<img className={classes.weather} src={imgSrc(0, index)} alt='weather icon' />
+							<div className={classes.weather}>
+								<img className={classes.weather_img} src={imgSrc(0, index)} alt='weather icon' />
+								<div className={classes.weather_text}>{pop(weatherData.hourly[index].pop, imgSrc(0, index))}</div>
+							</div>
 							<div className='hourly-box-temp'>{hourlyTemp.temp.toFixed(0)}°</div>
 						</div>
 					))}
