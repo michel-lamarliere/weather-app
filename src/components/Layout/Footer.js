@@ -24,7 +24,7 @@ const Footer = () => {
             </div>
             <div className={classes.enola}>
                 <div className={classes.names}>Designed by Enola Louge</div>
-                <a href='enola.louge.com' target='_blank' rel="noreferrer">
+                <a href='https://enola.louge.com' target='_blank' rel="noreferrer">
                     <img src={el_icon} alt='enola'/>
                 </a>
             </div>
