@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import classes from './Hourly.module.scss';
 
 import { useWeatherData } from '../../store/weather-context';

@@ -1,4 +1,4 @@
-Weather App using ReactJS, TypeScript and OpenWeather API.
+Weather App using ReactJS and OpenWeather API.
 
 https://michel-lamarliere.github.io/weather-app-react/
 

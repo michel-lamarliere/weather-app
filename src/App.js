@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './App.scss';
 
-import Header from './components/Layout/Header';
-import Current from './components/Current/Current';
-import Hourly from './components/Hourly/Hourly';
-import Daily from './components/Daily/Daily';
+import Current from './components/DataScreens/Current';
+import Hourly from './components/DataScreens/Hourly';
+import Daily from './components/DataScreens/Daily';
+import Layout from './components/Layout/Layout';
 
 function App(props) {
     useEffect(() => {
@@ -12,12 +12,11 @@ function App(props) {
     }, [])
 
     return (
-        <>
-            <Header />
+        <Layout>
             <Current />
             <Hourly />
             <Daily />
-        </>
+        </Layout>
     );
 }
 

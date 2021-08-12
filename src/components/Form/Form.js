@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import classes from './Form.module.scss';
 
 import { useUnit } from '../../store/unit-context';
-import { useSearch, useGeolocation } from '../../store/search-context';
+import { useGeolocation } from '../../store/geolocation-context';
 import { useCityData } from '../../store/city-context';
 import { useWeatherData } from '../../store/weather-context';
 
@@ -10,7 +10,6 @@ const Form = (props) => {
 	const inputRef = useRef();
 	// context
 	const [unit] = useUnit();
-	const [searchInput, setSearchInput] = useSearch();
 	const [geolocation, setGeolocation] = useGeolocation();
 	const [cityData, setCityData] = useCityData();
 	const [weatherData, setWeatherData] = useWeatherData();
