@@ -9,6 +9,10 @@ const Backdrop = (props) => {
 
     const [promptGeolocation, setPromptGeolocation] = prompt;
 
+    if (localStorage.getItem('city') !== null) {
+        setPromptGeolocation(false);
+    }
+
     const backdropOrNot =
 		promptGeolocation && localStorage.getItem('city') === null ? (
 			<div className={classes.backdrop}>{props.children}</div>

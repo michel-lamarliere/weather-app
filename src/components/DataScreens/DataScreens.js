@@ -14,7 +14,7 @@ const DataScreens = (props) => {
         setTimeout(() => {
             setLoading(false)
         }, 1000)
-    }, [])
+    }, []);
 
     return (
 		<>
