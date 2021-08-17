@@ -7,7 +7,7 @@ import { CityContext } from '../../store/city-context';
 import { WeatherContext } from '../../store/weather-context';
 
 const Form = (props) => {
-    const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+    const API_KEY = process.env.REACT_APP_API_KEY;
 	const inputRef = useRef();
 	// context
 	const [unit] = useContext(UnitContext);
@@ -30,7 +30,7 @@ const Form = (props) => {
 	};
 
 	const getCityData = (cityName) => {
-		fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=63711ece4bcfaa691a62cb55c0c063a2`, {
+		fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`, {
 			mode: 'cors',
 		})
 			.then(async (response) => {
@@ -66,7 +66,7 @@ const Form = (props) => {
 
 	const getWeatherData = (lon, lat, unit) => {
 		fetch(
-			`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=${unit}&appid=63711ece4bcfaa691a62cb55c0c063a2`,
+			`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=${unit}&appid=${API_KEY}`,
 			{ mode: 'cors' }
 		)
 			.then(async (response) => {
