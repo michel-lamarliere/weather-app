@@ -7,6 +7,7 @@ import { CityContext } from '../../store/city-context';
 import { WeatherContext } from '../../store/weather-context';
 
 const Form = (props) => {
+    const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 	const inputRef = useRef();
 	// context
 	const [unit] = useContext(UnitContext);
@@ -20,7 +21,7 @@ const Form = (props) => {
 
 	const getCityName = (lon, lat) => {
 		fetch(
-			`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=63711ece4bcfaa691a62cb55c0c063a2`
+			`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=${API_KEY}`
 		).then(async (response) => {
 			const cities = await response.json();
 			getCityData(cities[0].name);
