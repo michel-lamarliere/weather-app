@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import './App.scss';
 
-import Current from './components/DataScreens/Current';
-import Hourly from './components/DataScreens/Hourly';
-import Daily from './components/DataScreens/Daily';
+import Backdrop from './components/UI/Backdrop';
+import Modal from './components/UI/Modal';
+import DataScreens from './components/DataScreens/DataScreens';
 import Layout from './components/Layout/Layout';
 
 function App(props) {
@@ -12,11 +12,13 @@ function App(props) {
     }, [])
 
     return (
-        <Layout>
-            <Current />
-            <Hourly />
-            <Daily />
-        </Layout>
+        <>
+            <Backdrop />
+            <Modal />
+            <Layout>
+                <DataScreens />
+            </Layout>
+        </>
     );
 }
 

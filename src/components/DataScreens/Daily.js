@@ -1,17 +1,18 @@
+import { useContext } from 'react';
+
 import classes from './Daily.module.scss';
 
 import arrow_up from '../../assets/img/arrow_up.svg';
 import arrow_down from '../../assets/img/arrow_down.svg';
 
-import { useWeatherData } from '../../store/weather-context';
+import { WeatherContext } from '../../store/weather-context';
 import { useIcons } from '../../hooks/use-icons';
 import { usePop } from '../../hooks/use-pop';
 
 const Daily = () => {
-	const [weatherData] = useWeatherData();
-    const imgSrc = useIcons;
-    const pop = usePop;
-
+	const [weatherData] = useContext(WeatherContext);
+	const imgSrc = useIcons;
+	const pop = usePop;
 
 	const getDayOfWeek = (dataSource, index) => {
 		let dayOfWeek = new Date(

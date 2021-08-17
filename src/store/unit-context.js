@@ -1,10 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
-const UnitContext = React.createContext();
-
-export const useUnit = () => {
-    return useContext(UnitContext);
-};
+export const UnitContext = React.createContext();
 
 const UnitContextProvider = (props) => {
     const [unit, setUnit] = useState(true);

@@ -1,18 +1,19 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import classes from './Form.module.scss';
 
-import { useUnit } from '../../store/unit-context';
-import { useGeolocation } from '../../store/geolocation-context';
-import { useCityData } from '../../store/city-context';
-import { useWeatherData } from '../../store/weather-context';
+import { UnitContext } from '../../store/unit-context';
+import { GeolocationContext } from '../../store/geolocation-context';
+import { CityContext } from '../../store/city-context';
+import { WeatherContext } from '../../store/weather-context';
 
 const Form = (props) => {
 	const inputRef = useRef();
 	// context
-	const [unit] = useUnit();
-	const [geolocation, setGeolocation] = useGeolocation();
-	const [cityData, setCityData] = useCityData();
-	const [weatherData, setWeatherData] = useWeatherData();
+	const [unit] = useContext(UnitContext);
+    const { geo, prompt } = useContext(GeolocationContext);
+    const [geolocation, setGeolocation] = geo;
+	const [cityData, setCityData] = useContext(CityContext);
+	const [weatherData, setWeatherData] = useContext(WeatherContext);
 
 	const [cityInputIsValid, setCityInputIsValid] = useState(false);
 	const [cityInputTouched, setCityInputTouched] = useState(false);
@@ -111,9 +112,9 @@ const Form = (props) => {
 
 		if (localStorage.getItem('city')) {
 			getCityData(localStorage.getItem('city'));
-		} else {
-			getCityData('toulouse');
-		}
+        } else {
+            getCityData('toulouse')
+        }
 
 		if (firstUpdate.current) {
 			firstUpdate.current = false;

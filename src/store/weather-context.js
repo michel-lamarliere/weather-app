@@ -1,10 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
-const WeatherContext = React.createContext();
-
-export const useWeatherData = () => {
-    return useContext(WeatherContext);
-};
+export const WeatherContext = React.createContext();
 
 const WeatherContextProvider = (props) => {
     const [weatherData, setWeatherData] = useState();

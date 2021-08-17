@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import oneD from '../assets/img/01d.svg';
 import twoD from '../assets/img/02d.svg';
 import threeD from '../assets/img/03d.svg';
@@ -11,10 +13,10 @@ import fiftyD from '../assets/img/50d.svg';
 import oneN from '../assets/img/01n.svg';
 import twoN from '../assets/img/02n.svg';
 
-import { useWeatherData } from '../store/weather-context';
+import { WeatherContext } from '../store/weather-context';
 
 export const useIcons = (interval, index) => {
-	const [weatherData] = useWeatherData();
+	const [weatherData] = useContext(WeatherContext);
     let imgSrc;
 
 	const getIcons = (json, time, sunrise, sunset) => {
@@ -66,9 +68,9 @@ export const useIcons = (interval, index) => {
 			weatherData &&
 			getIcons(
 				weatherData.hourly[index],
-				new Date((weatherData.hourly[index].dt + weatherData.timezone_offset) * 1000).getHours(),
-				new Date((weatherData.current.sunrise + weatherData.timezone_offset) * 1000).getHours(),
-				new Date((weatherData.current.sunset + weatherData.timezone_offset) * 1000).getHours()
+				new Date((weatherData.hourly[index].dt + weatherData.timezone_offset) * 1000).getUTCHours(),
+				new Date((weatherData.current.sunrise + weatherData.timezone_offset) * 1000).getUTCHours(),
+				new Date((weatherData.current.sunset + weatherData.timezone_offset) * 1000).getUTCHours()
 			);
 	} else if (interval === 1) {
 		// daily
@@ -76,9 +78,9 @@ export const useIcons = (interval, index) => {
 			weatherData &&
 			getIcons(
 				weatherData.daily[index],
-				new Date((weatherData.daily[index].dt + weatherData.timezone_offset) * 1000).getHours(),
-				new Date((weatherData.current.sunrise + weatherData.timezone_offset) * 1000).getHours(),
-				new Date((weatherData.current.sunset + weatherData.timezone_offset) * 1000).getHours()
+				new Date((weatherData.daily[index].dt + weatherData.timezone_offset) * 1000).getUTCHours(),
+				new Date((weatherData.current.sunrise + weatherData.timezone_offset) * 1000).getUTCHours(),
+				new Date((weatherData.current.sunset + weatherData.timezone_offset) * 1000).getUTCHours()
 			);
 	}
 

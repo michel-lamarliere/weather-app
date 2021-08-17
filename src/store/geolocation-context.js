@@ -1,16 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
-const GeolocationContext = React.createContext();
-
-export const useGeolocation = () => {
-	return useContext(GeolocationContext);
-};
+export const GeolocationContext = React.createContext();
 
 const GeolocationContextProvider = (props) => {
+    const [promptGeolocation, setPromptGeolocation] = useState(true);
     const [geolocation, setGeolocation] = useState(false);
 
     return (
-        <GeolocationContext.Provider value={[geolocation, setGeolocation]}>
+        <GeolocationContext.Provider value={{ geo: [geolocation, setGeolocation], prompt: [promptGeolocation, setPromptGeolocation] }}>
             {props.children}
         </GeolocationContext.Provider>
 	);

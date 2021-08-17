@@ -1,10 +1,6 @@
-import React, { useState ,useContext } from 'react';
+import React, { useState } from 'react';
 
-const CityContext = React.createContext();
-
-export const useCityData = () => {
-    return useContext(CityContext);
-}
+export const CityContext = React.createContext();
 
 const CityContextProvider = (props) => {
     let [cityData, setCityData] = useState({

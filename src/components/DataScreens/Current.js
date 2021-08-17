@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import classes from './Current.module.scss';
 
 import arrow_up from '../../assets/img/arrow_up.svg';
@@ -6,14 +7,14 @@ import arrow_down from '../../assets/img/arrow_down.svg';
 import sunrise from '../../assets/img/sunrise.svg';
 import sunset from '../../assets/img/sunset.svg';
 
-import { useCityData } from '../../store/city-context';
-import { useWeatherData } from '../../store/weather-context';
+import { CityContext } from '../../store/city-context';
+import { WeatherContext } from '../../store/weather-context';
 
 import { useIcons } from '../../hooks/use-icons';
 
 const Current = () => {
-	const [cityData] = useCityData();
-	const [weatherData] = useWeatherData();
+	const [cityData] = useContext(CityContext);
+	const [weatherData] = useContext(WeatherContext);
 
 	const imgSrc = useIcons(0, 0);
 
@@ -53,12 +54,12 @@ const Current = () => {
 	};
 
 	const getSunriseSunset = (sunriseOrSunset) => {
-		let hours = new Date((sunriseOrSunset + weatherData.timezone_offset) * 1000).getHours();
+		let hours = new Date((sunriseOrSunset + weatherData.timezone_offset) * 1000).getUTCHours();
 		if (hours.toString().length < 2) {
 			hours = `0${hours}`;
 		}
 
-		let minutes = new Date((sunriseOrSunset + weatherData.timezone_offset) * 1000).getMinutes();
+		let minutes = new Date((sunriseOrSunset + weatherData.timezone_offset) * 1000).getUTCMinutes();
 
 		if (minutes.toString().length < 2) {
 			minutes = `0${minutes}`;

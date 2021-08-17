@@ -1,15 +1,16 @@
+import { useContext } from 'react';
 import classes from './Buttons.module.scss';
 
-import geo from '../../assets/img/geolocation.png';
+import geo_icon from '../../assets/img/geolocation.png';
 
 import left_button from '../../assets/img/left.png';
 import right_button from '../../assets/img/right.png';
 
-import { useGeolocation } from '../../store/geolocation-context';
-import { useUnit } from '../../store/unit-context';
+import { GeolocationContext } from '../../store/geolocation-context';
+import { UnitContext } from '../../store/unit-context';
 
 export const UnitButton = (props) => {
-    const [unit, setUnit] = useUnit();
+    const [unit, setUnit] = useContext(UnitContext);
 
     const unitSign = unit ? '°C' : '°F';
 
@@ -23,14 +24,15 @@ export const UnitButton = (props) => {
 };
 
 export const GeoButton = () => {
-    const [geolocation, setGeolocation] = useGeolocation();
+    const { geo } = useContext(GeolocationContext);
+    const [geolocation, setGeolocation] = geo;
 
     const geolocationHandler = () => {
-        setGeolocation(!geolocation)
+        setGeolocation(true)
     };
     return (
         <button className={classes.geo} onClick={geolocationHandler}>
-            <img src={geo} alt='geolocation' />
+            <img src={geo_icon} alt='geolocation' />
         </button>
     )
 };
