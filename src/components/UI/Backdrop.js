@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import classes from './Backdrop.module.scss';
 
@@ -9,9 +9,11 @@ const Backdrop = (props) => {
 
     const [promptGeolocation, setPromptGeolocation] = prompt;
 
-    if (localStorage.getItem('city') !== null) {
-        setPromptGeolocation(false);
-    }
+    useEffect(() => {
+        if (localStorage.getItem('city') !== null) {
+            setPromptGeolocation(false);
+        }
+    }, []);
 
     const backdropOrNot =
 		promptGeolocation && localStorage.getItem('city') === null ? (
