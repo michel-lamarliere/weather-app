@@ -7,7 +7,7 @@ import { CityContext } from '../../store/city-context';
 import { WeatherContext } from '../../store/weather-context';
 
 const Form = (props) => {
-	const API_KEY = process.env.REACT_APP_API_KEY;
+	const API_KEY = 'b410464e60720fdbe33be6b40ae2a43f';
 	const inputRef = useRef();
 	// context
 	const [unit] = useContext(UnitContext);
