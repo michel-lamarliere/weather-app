@@ -1,28 +1,24 @@
 @import './helpers/variables.scss';
 
 @font-face {
-    font-family: Montserrat-Medium;
-    src: url('./assets/fonts/Montserrat-Medium.ttf');
+	font-family: Montserrat-Medium;
+	src: url('./assets/fonts/Montserrat-Medium.ttf');
 }
 
 html {
-    font-size: 15px;
-    font-family: Montserrat-Medium;
+	font-size: 15px;
+	font-family: Montserrat-Medium;
 }
 
 body {
-    margin: auto;
-    background-color: $bodyBgColor;
-    color: $bodyTextColor;
-    height: 100%;
+	margin: auto;
+	background-color: $bodyBgColor;
+	color: $bodyTextColor;
+	height: 100%;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
-}
-
-input, button {
-    border: 0;
-    outline: 0;
+input,
+button {
+	border: 0;
+	outline: 0;
 }

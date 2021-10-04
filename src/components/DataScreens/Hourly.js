@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { useRef, useEffect } from 'react';
 import classes from './Hourly.module.scss';
@@ -46,13 +46,20 @@ const Hourly = () => {
 		<div className={classes.container}>
 			<LeftButton
 				onClick={() =>
-					containerRef.current.scrollBy({ left: -120, top: 0, behavior: 'smooth' })
+					containerRef.current.scrollBy({
+						left: -120,
+						top: 0,
+						behavior: 'smooth',
+					})
 				}
 			/>
 			<div ref={containerRef} className={classes.hourly}>
 				{weatherData &&
 					weatherData.hourly.slice(0, 24).map((hourlyTemp, index) => (
-						<div className={`${classes.box} ${hourClass}`} key={Math.random()}>
+						<div
+							className={`${classes.box} ${hourClass}`}
+							key={Math.random()}
+						>
 							<div>
 								{hourFormatter(
 									new Date(
@@ -73,7 +80,9 @@ const Hourly = () => {
 									{pop(weatherData.hourly[index].pop, imgSrc(0, index))}
 								</div>
 							</div>
-							<div className='hourly-box-temp'>{hourlyTemp.temp.toFixed(0)}°</div>
+							<div className='hourly-box-temp'>
+								{hourlyTemp.temp.toFixed(0)}°
+							</div>
 						</div>
 					))}
 			</div>

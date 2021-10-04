@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import classes from './Daily.module.scss';
 
@@ -51,7 +51,9 @@ const Daily = () => {
 	let index = 0;
 
 	const getDate = (dataSource, index) => {
-		let date = new Date((dataSource.daily[index].dt + dataSource.timezone_offset) * 1000)
+		let date = new Date(
+			(dataSource.daily[index].dt + dataSource.timezone_offset) * 1000
+		)
 			.toUTCString()
 			.slice(5, 16);
 		return date;
@@ -66,7 +68,9 @@ const Daily = () => {
 							<div className={classes.date_day}>
 								{getDayOfWeek(weatherData, index)}
 							</div>
-							<div className={classes.date_date}>{getDate(weatherData, index)}</div>
+							<div className={classes.date_date}>
+								{getDate(weatherData, index)}
+							</div>
 						</div>
 						<div className={classes.minmax}>
 							<div className={classes.minmax_div}>

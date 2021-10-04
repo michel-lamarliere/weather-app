@@ -1,32 +1,31 @@
-import { useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import classes from './Backdrop.module.scss';
 
 import { GeolocationContext } from '../../store/geolocation-context';
 
 const Backdrop = (props) => {
-    const { prompt } = useContext(GeolocationContext);
+	const { prompt } = useContext(GeolocationContext);
 
-    const [promptGeolocation, setPromptGeolocation] = prompt;
+	const [promptGeolocation, setPromptGeolocation] = prompt;
 
-    useEffect(() => {
-        if (localStorage.getItem('city') !== null) {
-            setPromptGeolocation(false);
-        }
-    }, []);
+	useEffect(() => {
+		if (localStorage.getItem('city') !== null) {
+			setPromptGeolocation(false);
+		}
+	}, []);
 
-    const backdropOrNot =
+	const backdropOrNot =
 		promptGeolocation && localStorage.getItem('city') === null ? (
 			<div className={classes.backdrop}>{props.children}</div>
 		) : (
 			''
 		);
-    
-    return ReactDOM.createPortal(
-        <>
-            {backdropOrNot}
-        </>
-    , document.getElementById('backdrop'))
+
+	return ReactDOM.createPortal(
+		<React.Fragment>{backdropOrNot}</React.Fragment>,
+		document.getElementById('backdrop')
+	);
 };
 
 export default Backdrop;

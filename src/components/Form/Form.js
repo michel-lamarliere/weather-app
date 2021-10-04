@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import classes from './Form.module.scss';
 
 import { UnitContext } from '../../store/unit-context';
@@ -7,13 +7,12 @@ import { CityContext } from '../../store/city-context';
 import { WeatherContext } from '../../store/weather-context';
 
 const Form = (props) => {
-    const API_KEY = process.env.REACT_APP_API_KEY;
-    console.log(API_KEY);
+	const API_KEY = process.env.REACT_APP_API_KEY;
 	const inputRef = useRef();
 	// context
 	const [unit] = useContext(UnitContext);
-    const { geo, prompt } = useContext(GeolocationContext);
-    const [geolocation, setGeolocation] = geo;
+	const { geo, prompt } = useContext(GeolocationContext);
+	const [geolocation, setGeolocation] = geo;
 	const [cityData, setCityData] = useContext(CityContext);
 	const [weatherData, setWeatherData] = useContext(WeatherContext);
 
@@ -22,7 +21,7 @@ const Form = (props) => {
 
 	const getCityName = (lon, lat) => {
 		fetch(
-            `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+			`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${API_KEY}`
 		).then(async (response) => {
 			const cities = await response.json();
 			getCityData(cities[0].name);
@@ -31,9 +30,12 @@ const Form = (props) => {
 	};
 
 	const getCityData = (cityName) => {
-		fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`, {
-			mode: 'cors',
-		})
+		fetch(
+			`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`,
+			{
+				mode: 'cors',
+			}
+		)
 			.then(async (response) => {
 				const cityDataJson = await response.json();
 
@@ -92,7 +94,11 @@ const Form = (props) => {
 		const enteredCityName = inputRef.current.value;
 		setCityInputTouched(true);
 
-		if (enteredCityName.trim().length === 0 || enteredCityName === undefined || cityData.errorText) {
+		if (
+			enteredCityName.trim().length === 0 ||
+			enteredCityName === undefined ||
+			cityData.errorText
+		) {
 			inputRef.current.value = '';
 			setCityInputIsValid(false);
 			return;
@@ -101,7 +107,7 @@ const Form = (props) => {
 
 		localStorage.setItem('city', enteredCityName);
 		getCityData(enteredCityName);
-        inputRef.current.value = '';
+		inputRef.current.value = '';
 	};
 
 	const cityInputIsInvalid = !cityInputIsValid && cityInputTouched;
@@ -114,9 +120,9 @@ const Form = (props) => {
 
 		if (localStorage.getItem('city')) {
 			getCityData(localStorage.getItem('city'));
-        } else {
-            getCityData('toulouse')
-        }
+		} else {
+			getCityData('toulouse');
+		}
 
 		if (firstUpdate.current) {
 			firstUpdate.current = false;
