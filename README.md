@@ -1,5 +1,5 @@
 Weather App using ReactJS and OpenWeather API.
 
-https://michel-lamarliere.github.io/weather-app-react/
+https://weather-app-seven-tau.vercel.app/
 
 Design by Enola Louge. https://enolalouge.com/
