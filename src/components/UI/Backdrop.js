@@ -23,7 +23,7 @@ const Backdrop = (props) => {
 		);
 
 	return ReactDOM.createPortal(
-		<React.Fragment>{backdropOrNot}</React.Fragment>,
+		<>{backdropOrNot}</>,
 		document.getElementById('backdrop')
 	);
 };

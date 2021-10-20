@@ -137,7 +137,7 @@ const Form = (props) => {
 	}
 
 	return (
-		<div className={classes.test}>
+		<div className={classes.wrapper}>
 			<GeoButton />
 			<form className={classes.form} onSubmit={submitHandler}>
 				<span className={classes.magnifier}></span>
