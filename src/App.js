@@ -11,13 +11,13 @@ const App = (props) => {
 	}, []);
 
 	return (
-		<React.Fragment>
+		<>
 			<Backdrop />
 			<Modal />
 			<Layout>
 				<DataScreens />
 			</Layout>
-		</React.Fragment>
+		</>
 	);
 };
 

@@ -43,7 +43,7 @@ const Modal = () => {
 			''
 		);
 
-	return <div>{modalOrNot}</div>;
+	return <>{modalOrNot}</>;
 };
 
 export default Modal;

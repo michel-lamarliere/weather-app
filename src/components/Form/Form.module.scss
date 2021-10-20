@@ -1,37 +1,42 @@
 @import '../../helpers/variables.scss';
 
+.test {
+	display: flex;
+	align-items: center;
+}
+
 .form {
-    position: relative;
-    display: flex;
-    width: 20rem;
-    height: 2rem;
-};
+	position: relative;
+	display: flex;
+	width: 20rem;
+	height: 2.5rem;
+}
 
 .searchbar {
-    width: 100%;
-    height: 100%;
-    padding: 0.5rem;
-    padding-left: 3rem;
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
-    color: white;
-    border: 2px solid transparent;
-    background-color: $BgOpacity25;
+	width: 100%;
+	height: 100%;
+	padding: 0 1rem 0 3rem;
+	font-size: 1.2rem;
+	color: white;
+	border: 2px solid transparent;
+	border-left: 2px solid $BgOpacity25;
+	border-right: 2px solid $BgOpacity25;
+	background-color: $BgOpacity25;
 
-    &_error {
-      border: 2px solid rgba(255, 2, 2, 0.25);
-      background-color: rgba(255, 2, 2, 0.25);
-    }
-};
+	&_error {
+		border: 2px solid $errorBgColor;
+		background-color: $errorBgColor;
+	}
+}
 
-.magnifier{
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1rem;
-    height: 1rem;
-    background: url('../../assets/img/loupe.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-};
+.magnifier {
+	position: absolute;
+	left: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 1.125rem;
+	height: 1.125rem;
+	background: url('../../assets/img/loupe.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+}

@@ -1,67 +1,72 @@
+@import '../../helpers/variables.scss';
+
 .current {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    width: 15rem;
-    height: 20rem;
-    margin: 1rem auto 0 auto;
-    padding: 0.5rem;
-    border-radius: 2rem;
-    box-shadow: inset;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	gap: 1rem;
+	width: 15rem;
+	min-height: 20rem;
+	margin: 2rem auto 2rem auto;
+	padding: 0.5rem;
+	border-radius: 2rem;
+	box-shadow: inset;
 }
 
 .city {
-    font-size: 2rem;
-    text-align: center;
+	font-size: 2rem;
+	text-align: center;
 }
 
 .weather {
-    width: 6rem;
-    height: 6rem;
-    font-size: 1.2rem;
+	width: 6rem;
+	height: 6rem;
+	font-size: 1.2rem;
 }
 
 .temp {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 .minmax {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 50%;
-    height: 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 50%;
+	height: 2rem;
 
-    &-div {
-        display: flex;
-        justify-content: space-evenly;
-        width: 100%;
-        height: 1rem;
-    }
+	&-div {
+		display: flex;
+		justify-content: space-evenly;
+		width: 100%;
+		height: 1rem;
+	}
 }
 
 .sunrise_sunset {
-    display: flex;
-    justify-content: space-between;
-    height: 1.5rem;
-    align-items: center;
-    width: 45%;
+	display: flex;
+	justify-content: space-between;
+	height: 1.5rem;
+	align-items: center;
+	width: 45%;
 
-    &_div {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+	&_div {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-        & > img {
-            width: 75%;
-        }
-    }
+		& > img {
+			width: 75%;
+		}
+	}
 }
 
 .error {
-    font-size: 1.2rem;
-    text-align: center;
+	font-size: 1rem;
+	color: $errorColor;
+	opacity: 1;
+	text-align: center;
 }

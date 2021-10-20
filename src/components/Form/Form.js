@@ -5,6 +5,7 @@ import { UnitContext } from '../../store/unit-context';
 import { GeolocationContext } from '../../store/geolocation-context';
 import { CityContext } from '../../store/city-context';
 import { WeatherContext } from '../../store/weather-context';
+import { GeoButton, UnitButton } from '../UI/Buttons';
 
 const Form = (props) => {
 	const API_KEY = 'b410464e60720fdbe33be6b40ae2a43f';
@@ -43,6 +44,7 @@ const Form = (props) => {
 				getWeatherData(cityDataJson.coord.lon, cityDataJson.coord.lat, unitSign);
 
 				if (cityDataJson.coord.lon) {
+					localStorage.setItem('city', cityDataJson.name);
 					setCityData((prevCityData) => {
 						return {
 							...prevCityData,
@@ -94,18 +96,14 @@ const Form = (props) => {
 		const enteredCityName = inputRef.current.value;
 		setCityInputTouched(true);
 
-		if (
-			enteredCityName.trim().length === 0 ||
-			enteredCityName === undefined ||
-			cityData.errorText
-		) {
+		if (enteredCityName.trim().length === 0 || enteredCityName === undefined) {
 			inputRef.current.value = '';
 			setCityInputIsValid(false);
 			return;
 		}
 		setCityInputIsValid(true);
 
-		localStorage.setItem('city', enteredCityName);
+		// localStorage.setItem('city', enteredCityName);
 		getCityData(enteredCityName);
 		inputRef.current.value = '';
 	};
@@ -132,23 +130,27 @@ const Form = (props) => {
 	}, [unit]);
 
 	if (geolocation) {
-		let coord = navigator.geolocation.getCurrentPosition((position) => {
+		navigator.geolocation.getCurrentPosition((position) => {
 			getCityName(position.coords.longitude, position.coords.latitude);
 		});
 		setGeolocation(false);
 	}
 
 	return (
-		<form className={classes.form} onSubmit={submitHandler}>
-			<span className={classes.magnifier}></span>
-			<input
-				ref={inputRef}
-				type='search'
-				className={`${classes.searchbar} ${inputClasses}`}
-				placeholder='Search'
-				onChange={inputChangeHandler}
-			/>
-		</form>
+		<div className={classes.test}>
+			<GeoButton />
+			<form className={classes.form} onSubmit={submitHandler}>
+				<span className={classes.magnifier}></span>
+				<input
+					ref={inputRef}
+					type='text'
+					className={`${classes.searchbar} ${inputClasses}`}
+					placeholder='Search'
+					onChange={inputChangeHandler}
+				/>
+			</form>
+			<UnitButton />
+		</div>
 	);
 };
 

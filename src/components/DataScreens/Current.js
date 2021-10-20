@@ -78,6 +78,7 @@ const Current = () => {
 
 	return (
 		<div className={classes.current}>
+			<div className={classes.error}>{cityData.errorText}</div>
 			<div className={classes.city}>{cityData.city}</div>
 			<img src={imgSrc} alt='icon' className={classes.weather} />
 			<div className={classes.temp}>
@@ -112,7 +113,6 @@ const Current = () => {
 					</div>
 				</div>
 			</div>
-			<div className={classes.error}>{cityData.errorText}</div>
 		</div>
 	);
 };
