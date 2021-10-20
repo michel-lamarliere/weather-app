@@ -88,6 +88,10 @@ const Form = (props) => {
 
 	const inputChangeHandler = () => {
 		setCityInputIsValid(true);
+		setCityData((prevCityData) => ({
+			...prevCityData,
+			errorText: '',
+		}));
 	};
 
 	const submitHandler = (event) => {
