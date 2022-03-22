@@ -8,7 +8,7 @@ import { WeatherContext } from '../../store/weather-context';
 import { GeoButton, UnitButton } from '../UI/Buttons';
 
 const Form = (props) => {
-	const API_KEY = 'b410464e60720fdbe33be6b40ae2a43f';
+	const API_KEY = process.env.API_KEY;
 	const inputRef = useRef();
 	// context
 	const [unit] = useContext(UnitContext);
@@ -106,8 +106,6 @@ const Form = (props) => {
 			return;
 		}
 		setCityInputIsValid(true);
-
-		// localStorage.setItem('city', enteredCityName);
 		getCityData(enteredCityName);
 		inputRef.current.value = '';
 	};
