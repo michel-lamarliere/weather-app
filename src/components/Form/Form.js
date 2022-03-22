@@ -22,7 +22,7 @@ const Form = (props) => {
 
 	const getCityName = (lon, lat) => {
 		fetch(
-			`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+			`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`
 		).then(async (response) => {
 			const cities = await response.json();
 			getCityData(cities[0].name);
@@ -32,7 +32,7 @@ const Form = (props) => {
 
 	const getCityData = (cityName) => {
 		fetch(
-			`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`,
+			`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.REACT_APP_API_KEY}`,
 			{
 				mode: 'cors',
 			}
@@ -71,7 +71,7 @@ const Form = (props) => {
 
 	const getWeatherData = (lon, lat, unit) => {
 		fetch(
-			`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=${unit}&appid=${API_KEY}`,
+			`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=${unit}&appid=${process.env.REACT_APP_API_KEY}`,
 			{ mode: 'cors' }
 		)
 			.then(async (response) => {
