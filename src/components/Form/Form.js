@@ -22,7 +22,7 @@ const Form = (props) => {
 
 	const getCityName = (lon, lat) => {
 		fetch(
-			`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+			`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${API_KEY}`
 		).then(async (response) => {
 			const cities = await response.json();
 			getCityData(cities[0].name);
